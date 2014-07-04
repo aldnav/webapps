@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +52,9 @@ ROOT_URLCONF = 'autostatsproj.urls'
 
 WSGI_APPLICATION = 'autostatsproj.wsgi.application'
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
