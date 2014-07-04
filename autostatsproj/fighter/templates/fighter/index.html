@@ -5,7 +5,6 @@
 </head>
 <body>
     {% if all_fighters %}
-        {{ all_fighters }}
         <ul>
         {% for fighter in all_fighters %}
             <li> <a href="/fighter/{{fighter.id}}/">{{fighter.name}}</a></li>
