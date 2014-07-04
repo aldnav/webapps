@@ -7,7 +7,7 @@
     {% if all_fighters %}
         <ul>
         {% for fighter in all_fighters %}
-            <li> <a href="/fighter/{{fighter.id}}/">{{fighter.name}}</a></li>
+            <li> <a href="{{fighter.get_absolute_url}}">{{fighter.name}}</a></li>
         {% endfor %}
         </ul>
     {% else %}

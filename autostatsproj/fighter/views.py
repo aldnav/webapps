@@ -11,6 +11,10 @@ def index(request):
 	})
 	return render(request, 'fighter/index.html', context)
 
-def detail(request, fighter_id):
+# def detail(request, fighter_id):
+# 	fighter = get_object_or_404(Fighter, pk=fighter_id)
+# 	return render(request, 'fighter/detail.html', {'fighter':fighter})
+
+def detail(request, fighter_slug, fighter_id):
 	fighter = get_object_or_404(Fighter, pk=fighter_id)
-	return render(request, 'fighter/detail.html', {'fighter':fighter})
+	return render(request, 'fighter/fighter.html', {'fighter':fighter})
