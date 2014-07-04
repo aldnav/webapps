@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fighter</title>
+</head>
+<body>
+    {% if all_fighters %}
+        {{ all_fighters }}
+        <ul>
+        {% for fighter in all_fighters %}
+            <li> <a href="/fighter/{{fighter.id}}/">{{fighter.name}}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No fighters.</p>
+    {% endif %}
+</body>
+</html>

@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'autostatsproj.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^fighter/', include('fighter.urls')),
+    url(r'^admin/', include(admin.site.urls))
     # url(r'^admin/', 'fighter.models.'),
 )
