@@ -9,6 +9,7 @@
 		<span>Age: {{fighter.age}}</span>
 		<span>Weight: {{fighter.weight}}</span>
 		<span>Height: {{fighter.height}}</span>
+		<span>Division: {{fighter.division|title}}</span>
 	</div>
 	<hr>
 	<div id='statistics'>
@@ -19,8 +20,8 @@
 		<span>Win Finish %: {{fighter.win_finish}}</span>
 		<span>Quality Performance %: {{fighter.win_finish}}</span>
 		{% if fighter.last_opponent %}
-			<span>Last Fight: {{fight_status}} against
-				<a href="{{fighter.last_opponent.get_absolute_url}}">{{fighter.last_opponent.name}}</a>
+			<span>Last Fight: {{fight_status|default_if_none:"NA"}} against
+				<a href="{{fighter.last_opponent.get_absolute_url}}">{{fighter.last_opponent.name|default_if_none:"NA"}}</a>
 			</span>
 		{% endif %}
 	</div>

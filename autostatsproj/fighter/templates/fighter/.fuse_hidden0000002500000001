@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{fighter.name}} | Fighter</title>
+</head>
+<body>
+	<div id='bio'>
+		<h4>{{fighter.name}}</h4>
+		<span>Age: {{fighter.age}}</span>
+		<span>Weight: {{fighter.weight}}</span>
+		<span>Height: {{fighter.height}}</span>
+	</div>
+	<hr>
+	<div id='statistics'>
+		<span>Pro Record: {{fighter.wins}}-{{fighter.loses}}-{{fighter.draws}}</span>
+		<span>Octagon Time: {{fighter.octagon_time}}</span>
+		<span>540 Metric: {{fighter.f_540_metric}}</span>
+		<span>Rating Points: {{fighter.rating_points}}</span>
+		<span>Win Finish %: {{fighter.win_finish}}</span>
+		<span>Quality Performance %: {{fighter.win_finish}}</span>
+		{% if fighter.last_opponent %}
+			<span>Last Fight: {{fight_status}} against
+				<a href="{{fighter.last_opponent.get_absolute_url}}">{{fighter.last_opponent.name}}</a>
+			</span>
+		{% endif %}
+	</div>
+</body>
+</html>

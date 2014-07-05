@@ -13,5 +13,12 @@
     {% else %}
         <p>No fighters.</p>
     {% endif %}
+    <form action="scrape/" method="post">{% csrf_token %}
+        <label for="fm_url">Fightmatrix url: </label>
+        <input id="fm_url" type="url" name="fm_url">
+        <label for="mma_url">MixedMartialArts url: </label>
+        <input id="mma_url" type="url" name="mma_url">
+        <input type="submit" name="submit" value="Add fighter">
+    </form>
 </body>
 </html>
