@@ -11,7 +11,7 @@ class FighterAdmin(admin.ModelAdmin):
 	search_fields = ['name', 'age']
 	fieldsets = [
 		('Bio',			{'fields': ['name', 'age', 'weight', 'height']}),
-		('Statistics', 	{'fields': ['division','wins','loses','draws','octagon_time','_540_metric', 'rating_points', 'win_finish', 'quality_performance','last_opponent','fight_status']})
+		('Statistics', 	{'fields': ['division','wins','loses','draws','octagon_time','f_540_metric', 'rating_points', 'win_finish', 'quality_performance','last_opponent','fight_status']})
 	]
 
 admin.site.register(Fighter, FighterAdmin)

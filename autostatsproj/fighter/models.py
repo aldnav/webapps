@@ -6,17 +6,17 @@ from django.template.defaultfilters import slugify
 class Fighter(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(editable=True, null=True,blank=True)
-    age = models.IntegerField(null=True, blank=True)
-    weight = models.IntegerField('Weight (lbs)',null=True,blank=True)
-    height = models.IntegerField('Height (inches)',null=True,blank=True)
-    wins = models.IntegerField(null=True,blank=True)
-    loses = models.IntegerField(null=True,blank=True)
-    draws = models.IntegerField(null=True,blank=True)
-    octagon_time = models.IntegerField('Octagon Time (mins)',null=True,blank=True)
-    _540_metric = models.IntegerField('540 Metric',null=True,blank=True)
-    rating_points = models.IntegerField('Rating Points',null=True,blank=True)
-    win_finish = models.IntegerField('Win Finish %',null=True,blank=True)
-    quality_performance = models.IntegerField('Quality Performance %',null=True,blank=True)
+    age = models.IntegerField(null=True, default=0)
+    weight = models.IntegerField('Weight (lbs)',null=True, default=0)
+    height = models.IntegerField('Height (inches)',null=True, default=0)
+    wins = models.IntegerField(null=True, default=0)
+    loses = models.IntegerField(null=True, default=0)
+    draws = models.IntegerField(null=True, default=0)
+    octagon_time = models.IntegerField('Octagon Time (mins)',null=True, default=0)
+    f_540_metric = models.IntegerField('540 Metric',null=True, default=0)
+    rating_points = models.IntegerField('Rating Points',null=True, default=0)
+    win_finish = models.IntegerField('Win Finish %',null=True, default=0)
+    quality_performance = models.IntegerField('Quality Performance %',null=True, default=0)
     divisions = (
         ('WW', 'welterweight'),
         ('LW', 'lightweight'),
