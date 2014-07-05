@@ -1,27 +1,35 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.template import RequestContext, loader
+from django.views import generic
 from fighter.models import Fighter
 import skripper
 
 # Create your views here.
-def index(request):
-	all_fighters = Fighter.objects.order_by('-pub_date')
-	context = RequestContext(request, {
-		'all_fighters': all_fighters,
-	})
-	return render(request, 'fighter/index.html', context)
 
-# def detail(request, fighter_id):
-# 	fighter = get_object_or_404(Fighter, pk=fighter_id)
-# 	return render(request, 'fighter/detail.html', {'fighter':fighter})
+class IndexView(generic.ListView):
+	template_name = 'fighter/index.html'
+	context_object_name = 'all_fighters'
 
-def detail(request, fighter_slug, fighter_id):
-	fighter = get_object_or_404(Fighter, pk=fighter_id)
-	if fighter.fight_status == 'W':
-		fight_status = 'Won'
-	elif fighter.fight_status == 'L':
-		fight_status = 'Lost'
-	elif fighter.fight_status == 'D':
-		fight_status = 'Draw'
-	return render(request, 'fighter/fighter.html', {'fighter':fighter, 'fight_status':fight_status, 'skripper':skripper.a})
+	def get_queryset(self):
+		return Fighter.objects.order_by('-pub_date')
+
+class DetailView(generic.DetailView):
+	model = Fighter
+	context_object_name = 'fighter'
+	template_name = 'fighter/fighter.html'
+
+	def get_object(self, *args, **kwargs):
+		return get_object_or_404(Fighter, pk=self.kwargs['fighter_id'])
+
+	def get_context_data(self, **kwargs):
+		context = super(DetailView, self).get_context_data(**kwargs)
+		fighter = Fighter.objects.get(pk=self.kwargs['fighter_id'])
+		if fighter.fight_status == 'W':
+			fight_status = 'Won'
+		elif fighter.fight_status == 'L':
+			fight_status = 'Lost'
+		elif fighter.fight_status == 'D':
+			fight_status = 'Draw'		
+		context['fight_status'] = fight_status
+		return context
