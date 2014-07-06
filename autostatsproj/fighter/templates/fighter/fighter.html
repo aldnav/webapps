@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +6,11 @@
 </head>
 <body>
 	<div id='bio'>
+		{% if fighter.img_url %}
+			<img src="{{fighter.img_url}}" alt="{{fighter.name}}'s photo"/>
+		{% else %}
+			<img src="{% static "img/FighterHeadShotBlank.gif" %}" alt="{{fighter.name}}'s photo"/>
+		{% endif %}
 		<h4>{{fighter.name}}</h4>
 		<span>Age: {{fighter.age}}</span>
 		<span>Weight: {{fighter.weight}}</span>
