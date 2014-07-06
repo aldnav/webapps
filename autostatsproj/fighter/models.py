@@ -5,6 +5,9 @@ from django.template.defaultfilters import slugify
 # Create your models here.
 class Fighter(models.Model):
     name = models.CharField(max_length=200)
+    img_url = models.CharField(max_length=200, null=True, blank=True)
+    fm_url = models.CharField(max_length=200, null=True, blank=True)
+    mma_url = models.CharField(max_length=200, null=True, blank=True)
     slug = models.SlugField(editable=True, null=True,blank=True)
     age = models.IntegerField(null=True, default=0)
     weight = models.IntegerField('Weight (lbs)',null=True, default=0)
@@ -22,7 +25,7 @@ class Fighter(models.Model):
         ('LW', 'lightweight'),
         ('MW', 'middleweight')
     )
-    division = models.CharField(max_length=200, choices=divisions, default='WW')
+    division = models.CharField(max_length=200, choices=divisions, default='WW', null=True, blank=True)
     last_opponent = models.ForeignKey('self', null=True,blank=True)
     fight_status_options = (
         ('W', 'win'),
