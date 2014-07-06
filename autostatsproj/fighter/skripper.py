@@ -114,6 +114,9 @@ def scrape_details(fm_url, mma_url):
             soup = BeautifulSoup(r.text)
             data = {
                 'name': None,
+                'img_url': None,
+                'fm_url': None,
+                'mma_url': None,
                 'age':  None,
                 'height': None,
                 'weight': None,
@@ -129,6 +132,7 @@ def scrape_details(fm_url, mma_url):
                 'last_opponent': None,
                 'fight_status': None,
             }
+            data['fm_url'] = fm_url
             table = soup.find_all('table', {'class':'tblRank'})[0]
             tbody_rows = table.find_all('tr')
             try:
@@ -180,6 +184,12 @@ def scrape_details(fm_url, mma_url):
             r = requests.get(mma_url)
             soup = BeautifulSoup(r.text)
             if r.status_code == 200:
+                data['mma_url'] = mma_url
+                try:
+                    img_url = soup.find_all('div', {'class':'Info'})[0].div.img['src']
+                    if img_url:
+                        data['img_url'] = img_url
+                except: pass
                 try:
                     height = soup.find_all('td', text=re.compile('Height:'))[0].next_sibling.next_sibling.get_text().encode('utf-8').split()
                     height = int(height[0]) * 12 + int(height[2])
@@ -193,7 +203,7 @@ def scrape_details(fm_url, mma_url):
                         weight = data['weight']
                         if weight >= 155 and weight < 170: div = 'lightweight'
                         elif weight >= 170 and weight < 185: div = 'welterweight'
-                        elif weight >= 185 and weight < 205: div = 'middleweight'
+                        elif weight >= 185 and weight <= 205: div = 'middleweight'
                         data['division'] = div
                 except: pass
         
@@ -201,6 +211,10 @@ def scrape_details(fm_url, mma_url):
 
 if __name__ == '__main__':
     
-    fm = 'http://www.fightmatrix.com/fighter-profile/Johny+Hendricks/4741/'
+    # fm = 'http://www.fightmatrix.com/fighter-profile/Johny+Hendricks/4741/'
     mma = 'http://www.mixedmartialarts.com/f/698E678D3D567AE4/Johny-Hendricks/'
-    print scrape_details(fm, mma)
+    # print scrape_details(fm, mma)
+
+    r = requests.get(mma)
+    soup = BeautifulSoup(r.text)
+    print soup.find_all('div', {'class':'Info'})[0].img['alt']
